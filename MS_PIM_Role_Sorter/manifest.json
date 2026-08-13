@@ -1,0 +1,17 @@
+{
+  "manifest_version": 3,
+  "name": "MS PIM Role Sorter",
+  "version": "1.0",
+  "description": "Automatically sorts Azure/Entra PIM roles alphabetically by Role.",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://portal.azure.com/*",
+        "https://entra.microsoft.com/*",
+	"https://intune.microsoft.com/*"
+      ],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}
