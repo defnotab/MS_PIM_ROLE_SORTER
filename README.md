@@ -10,26 +10,40 @@ Automatically sorts Microsoft Entra PIM roles alphabetically by the **Role** col
 - ✅ No data collection or telemetry
 - ✅ No external services or remote code
 
-## Installation
+### Installation
+**Microsoft Edge (.crx)**
 
-### Microsoft Edge
+1. Download PIM-Role-Auto-Sorter.crx from the Releases page.
+2. Open edge://extensions.
+3. Enable Developer mode.
+4. Drag and drop the .crx file onto the Extensions page.
+5. Click Add extension if prompted.
+6. The extension is now installed and active.
 
-1. Download the latest release ZIP.
-2. Extract the ZIP file.
-3. Open `edge://extensions`.
-4. Enable **Developer mode**.
-5. Click **Load unpacked**.
+> If drag-and-drop is blocked, extract the extension package and use Load unpacked instead.
+
+
+**Google Chrome (.crx)**
+
+1. Download PIM-Role-Auto-Sorter.crx from the Releases page.
+2. Open chrome://extensions.
+3. Enable Developer mode.
+4. Drag and drop the .crx file onto the Extensions page.
+5. Click Add extension if prompted.
+6. The extension is now installed and active.
+
+> Newer Chrome versions may prevent direct installation of unsigned .crx files. If this occurs, extract the extension and use Load unpacked instead.
+
+**Alternative: Load Unpacked**
+
+1. Download and extract PIM-Role-Auto-Sorter.zip.
+2. Open:
+3. edge://extensions (Edge)
+   chrome://extensions (Chrome)
+4. Enable Developer mode.
+5. Click Load unpacked.
 6. Select the extracted extension folder.
-
-### Google Chrome
-
-1. Download the latest release ZIP.
-2. Extract the ZIP file.
-3. Open `chrome://extensions`.
-4. Enable **Developer mode**.
-5. Click **Load unpacked**.
-6. Select the extracted extension folder.
-
+7. The extension will be loaded immediately.
 ## Supported Pages
 
 - Microsoft Azure Portal PIM - My Roles
