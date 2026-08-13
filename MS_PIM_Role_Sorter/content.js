@@ -6,54 +6,121 @@
         "aadmigratedroles"
     ];
 
-    const isPimPage = TARGET_URLS.every(x =>
-        window.location.href.includes(x)
-    );
+    let currentUrl = location.href;
+    let sortedForThisVisit = false;
+    let observer = null;
 
-    if (!isPimPage) {
-        return;
+    function isPimPage() {
+        return TARGET_URLS.every(part =>
+            location.href.includes(part)
+        );
     }
 
-    let alreadySorted = false;
-
-    function clickRoleHeader() {
-        if (alreadySorted) {
-            return;
-        }
-
+    function getVisibleRoleHeader() {
         const headers = document.querySelectorAll(".azc-grid-headerlabel");
 
         for (const header of headers) {
-            if (header.textContent.trim() === "Role") {
-                console.log("PIM Role Sorter: Clicking Role column");
+            if (header.textContent.trim() !== "Role") {
+                continue;
+            }
 
-                header.click();
+            const rect = header.getBoundingClientRect();
 
-                // Click again if needed to guarantee ascending order.
-                setTimeout(() => {
-                    header.click();
-                }, 500);
+            const visible =
+                rect.width > 0 &&
+                rect.height > 0 &&
+                header.offsetParent !== null;
 
-                alreadySorted = true;
-                return true;
+            if (visible) {
+                return header;
             }
         }
 
-        return false;
+        return null;
     }
 
-    clickRoleHeader();
+    function clickRoleHeader() {
+        if (sortedForThisVisit) {
+            return true;
+        }
 
-    const observer = new MutationObserver(() => {
-        if (clickRoleHeader()) {
+        const header = getVisibleRoleHeader();
+
+        if (!header) {
+            return false;
+        }
+
+        console.log(
+            "PIM Role Sorter: found visible Role header, sorting"
+        );
+
+        header.click();
+
+        setTimeout(() => {
+            header.click();
+        }, 500);
+
+        sortedForThisVisit = true;
+        return true;
+    }
+
+    function armWatcher() {
+        if (!isPimPage()) {
+            return;
+        }
+
+        sortedForThisVisit = false;
+
+        console.log(
+            "PIM Role Sorter: arming watcher for",
+            location.href
+        );
+
+        if (observer) {
             observer.disconnect();
         }
-    });
 
-    observer.observe(document.body, {
-        childList: true,
-        subtree: true
-    });
+        if (clickRoleHeader()) {
+            return;
+        }
 
-    setTimeout(() => observer.disconnect(), 30000);
+        observer = new MutationObserver(() => {
+            if (clickRoleHeader()) {
+                observer.disconnect();
+            }
+        });
+
+        observer.observe(document.body, {
+            childList: true,
+            subtree: true
+        });
+
+        setTimeout(() => {
+            if (observer) {
+                observer.disconnect();
+            }
+        }, 30000);
+    }
+
+    console.log(
+        "PIM Role Sorter loaded",
+        location.href
+    );
+
+    armWatcher();
+
+    setInterval(() => {
+        if (location.href === currentUrl) {
+            return;
+        }
+
+        currentUrl = location.href;
+
+        console.log(
+            "PIM Role Sorter: location changed to",
+            currentUrl
+        );
+
+        armWatcher();
+    }, 500);
 })();
