@@ -12,9 +12,9 @@ Automatically sorts Microsoft Entra PIM roles alphabetically by the **Role** col
 
 ### Installation
 
-**Extension Browser**
+**Extension Store**
 
-1. Download the extension from here https://chromewebstore.google.com/detail/MS%20PIM%20Role%20Sorter/agingifggbgpmmdmfefcloiagfegngni
+1. You can download the extension here https://chromewebstore.google.com/detail/MS%20PIM%20Role%20Sorter/agingifggbgpmmdmfefcloiagfegngni
 
 **Microsoft Edge (.crx)**
 
